@@ -131,6 +131,30 @@ unsigned long long pow_mod(unsigned long long a, unsigned long long b, unsigned 
     if (b%2 == 1) ans = ans * a % n;
     return ans;
 }
+bool Miller (long long p, int ite)
+{
+    if (p<2)
+        return false;
+    if (p!=2 && p%2==0)
+        return false;
+    long long s = p-1;
+    while (s%2==0)
+        s/=2;
+    long long a, tmp, mod;
+    for (int i = 0; i < ite; i++)
+    {
+        a = rand()%(p-1) + 1; tmp = s;
+        mod = pow_mod(a,tmp,p);
+        while (tmp!=p-1 && mod!=1 && mod!= p-1)
+        {
+            mod = mul_mod(mod, mod, p);
+            tmp*=2;
+        }
+        if (mod!=p-1 && tmp%2==0)
+            return false;
+    }
+    return true;
+}
 int main()
 {
     sieve(1000000);
