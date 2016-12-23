@@ -12,7 +12,7 @@ vi primes;
 // Sieve of E
 void sieve(ll upper)
 {
-    sieve_size = upper +1;
+    sieve_size = upper;
     bs.set();
     for (ll i = 2; i <= sieve_size; i++)
         if (bs[i])
@@ -22,6 +22,36 @@ void sieve(ll upper)
             primes.push_back((int)i);
         }
 }
+void segmented_sieve(ll upper)
+{
+    ll limit = floor(sqrt(upper)) + 1;
+    sieve(limit);
+    ll low = limit, high = 2*limit;
+    while (low < upper)
+    {
+        bs.set();
+        ll lomin;
+        for (int i = 0; i < primes.size(); i++)
+        {
+            lomin = floor(low/primes[i])*primes[i];
+            while (lomin < low)
+                lomin += primes[i];
+            for (int j = lomin; j <high; j+=primes[i])
+                bs[j-low] = false;
+        }
+        for (int i = low; i < high; i++)
+        {
+            if (bs[i-low])
+            {
+                //if (i <= N) sp1++;
+                //if (i <= M) sp2++;
+            }
+        }
+        low = low + limit;
+        high = min(upper, high + limit);
+    }
+}
+
 bool isprime(ll N)
 {
     if (N <= sieve_size) return bs[N];
