@@ -14,6 +14,7 @@ void sieve(ll upper)
 {
     sieve_size = upper;
     bs.set();
+    bs[0] = bs[1] = false;
     for (ll i = 2; i <= sieve_size; i++)
         if (bs[i])
         {
