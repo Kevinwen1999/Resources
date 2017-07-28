@@ -3,6 +3,24 @@
 using namespace std;
 int R, C;
 char grid[MAXN][MAXN];
+void histogram() {
+    vector <int> mono;
+    int i = 0, tp;
+    while (i < M) {
+        if (mono.empty() || h[i] > h[mono.back()]) {
+            mono.push_back(i++);
+        } else {
+            tp = mono.back();
+            mono.pop_back();
+            ans = max(ans, h[tp] * (mono.empty() ? i : i - mono.back() - 1));
+        }
+    }
+    while (!mono.empty()) {
+        tp = mono.back();
+        mono.pop_back();
+        ans = max(ans, h[tp] * (mono.empty() ? i : i - mono.back() - 1));
+    }
+}
 struct Rect
 {
     int c, h;
