@@ -34,15 +34,15 @@ int main()
         else
         {
             int l = 0, r = leng - 1;
-            while(r-l>1)
+            while (l <= r) 
             {
-                int mid = (l+r)>>1;
-                if (tail[mid] < in2[i])
-                    l = mid;
-                else
-                    r = mid;
-            }
-            tail[r] = in2[i];
+				int mid = (l + r) / 2;
+				if (tail[mid] < in2[i]) 
+					l = mid + 1;
+				else
+					r = mid - 1;
+			}
+            tail[r + 1] = in2[i];
         }
     }
     cout<<leng<<"\n";
