@@ -30,6 +30,7 @@ int ctdecomp(int src) {
     calc_sz(src, -1);
     int ct = findct(src, -1);
     marked[ct] = true;
+    // dfs here
     for (int i : adj[ct]) {
         if (!marked[i]) {
             int cst = ctdecomp(i);
