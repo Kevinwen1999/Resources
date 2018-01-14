@@ -30,7 +30,7 @@ void precalc_exponents() {
 }
 void hash_string(string& in, ll F[], int p) {
     for (int i = 0; i < in.size(); i++) {
-        F[i] = (((in[i] - 'a') % MOD) * (prex[i] % MOD)) % MOD;
+        F[i] = (((in[i] - 'a' + 1) % MOD) * (prex[i] % MOD)) % MOD;
         if (i) F[i] = (F[i] + F[i - 1]) % MOD;
     }
 }
